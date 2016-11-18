@@ -1,12 +1,13 @@
 angular.module('app', [])
     .controller('gitHubController', ['$scope', '$http', function ($scope, $http) {
-        
-        if ($scope.username) {
-            if ($scope.username.length > 4) {
+        var minInputLength = 4;
+
+        $scope.onUserInputChanged = function() {
+            if ($scope.username.length > minInputLength) {
                 $http.get("https://api.github.com/users/" + $scope.username)
                     .success(function (data) {
                         console.log(data);
                     })
             }
-        }
+        };
 }]);
