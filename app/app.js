@@ -12,7 +12,7 @@ angular.module('app', [])
                         $scope.usersData = data;
                         console.log($scope.usersData);
 
-                        $http.get("https://api.github.com/users/" + $scope.username + "/following{/other_user}")
+                        $http.get("https://api.github.com/users/" + $scope.username + "/followers")
                             .then(function(data) {
                                 $scope.userFollowersData = data;
                                 console.log($scope.userFollowersData);
