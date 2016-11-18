@@ -14,7 +14,7 @@ angular.module('app', [])
 
                         $http.get("https://api.github.com/users/" + $scope.username + "/followers")
                             .then(function(data) {
-                                $scope.userFollowersData = data;
+                                $scope.userFollowersData = data.data;
                                 console.log($scope.userFollowersData);
                             });
                     });
