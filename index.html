@@ -28,13 +28,28 @@
             </tr>
             <tr>
                 <td>
-                    <h3>{{usersData.login}}</h3>
+                    <h3><a ng-click="showUserRepos({{usersData.login}})">{{usersData.login}}</a></h3>
                     <img width="80" height="80" src="{{usersData.avatar_url}}" alt="{{usersDatauser.name}}">
                 </td>
                 <td>
                     <ul ng-repeat="follower in userFollowersData | limitTo:3">
-                        <li>{{follower.login}}</li>
+                        <li><a ng-click="showUserRepos({{follower.login}})">{{follower.login}}</a></li>
                     </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div ng-show="userHasRepos">
+        <table>
+            <tr>
+                <th>Repo Name</th>
+                <th>Description</th>
+                <th>Last Changes</th>
+            </tr>
+            <tr ng-repeat="repo in userReposData">
+                <td>
+                    
                 </td>
             </tr>
         </table>

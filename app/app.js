@@ -2,6 +2,7 @@ angular.module('app', [])
     .controller('gitHubController', ['$scope', '$http', function ($scope, $http) {
         var minInputLength = 3;
         $scope.userFound = false;
+        $scope.userHasRepos = false;
 
         $scope.onUserInputChanged = function() {
             if ($scope.username.length > minInputLength) {
@@ -20,9 +21,19 @@ angular.module('app', [])
                     })
                     .error(function () {
                         $scope.userFound = false;
+                        $scope.userHasRepos = false;
                     });
             } else {
                 $scope.userFound = false;
             }
+        };
+
+        $scope.showUserRepos = function(userName) {
+            $http.get("https://api.github.com/users/" + userName + "/repos")
+                .success(function (data) {
+                  $scope.userHasRepos = true;
+                  $scope.userReposData = data;
+                  console.log($scope.userReposData);
+                });
         };
 }]);
