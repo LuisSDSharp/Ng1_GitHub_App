@@ -2,7 +2,6 @@ angular.module('app', [])
     .controller('gitHubController', ['$scope', '$http', function ($scope, $http) {
         var minInputLength = 3;
         $scope.userFound = false;
-        $scope.usersData = [];
 
         $scope.onUserInputChanged = function() {
             if ($scope.username.length > minInputLength) {
@@ -10,12 +9,7 @@ angular.module('app', [])
                     .then(function (data) {
                         $scope.userFound = true;
                         
-                        // Coverting object to array
-                        for (var key in data) {
-                            var tempObj = {}
-                            tempObj[key] = data[key].data;
-                            $scope.usersData.push(tempObj);
-                        }
+                        $scope.userFound = data;
 
                         console.log($scope.usersData);
                     })
