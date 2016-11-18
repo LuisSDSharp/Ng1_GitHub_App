@@ -17,7 +17,7 @@ angular.module('app', [])
                             $scope.usersData.push(tempObj);
                         }
 
-                        console.log(data);
+                        console.log($scope.usersData);
                     })
             } else {
                 $scope.userFound = false;
