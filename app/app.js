@@ -13,7 +13,7 @@ angular.module('app', [])
                         // Coverting object to array
                         for (var key in data) {
                             var tempObj = {}
-                            tempObj[key] = data[key];
+                            tempObj[key] = data[key].data;
                             $scope.usersData.push(tempObj);
                         }
 
