@@ -55,7 +55,7 @@
                     <p>{{repo.description}}</p>
                 </td>
                 <td>
-                    <ul ng-repeat="commit in userRepoCommitsData | limitTo:3">
+                    <ul ng-repeat="commit in showRepoCommits(repo.id) | limitTo:3">
                         <li>{{commit | json}}</li>
                     </ul>
                 </td>
