@@ -28,8 +28,8 @@
             </tr>
             <tr>
                 <td>
-                    <h3><a href="" ng-click="showUserRepos({{usersData.login}})">{{usersData.login}}</a></h3>
-                    <img width="80" height="80" src="{{usersData.avatar_url}}" alt="{{usersDatauser.name}}">
+                    <h3><a href="" ng-click="showUserRepos('carl')">{{usersData.login}}</a></h3>
+                    <img width="80" height="80" src="{{usersData.avatar_url}}" alt="{{usersData.name}}">
                 </td>
                 <td>
                     <ul ng-repeat="follower in userFollowersData | limitTo:3">
