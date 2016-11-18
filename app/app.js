@@ -17,6 +17,9 @@ angular.module('app', [])
                                 $scope.userFollowersData = data.data;
                                 console.log($scope.userFollowersData);
                             });
+                    })
+                    .error(function () {
+                        $scope.userFound = false;
                     });
             } else {
                 $scope.userFound = false;
