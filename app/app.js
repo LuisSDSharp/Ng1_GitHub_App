@@ -9,7 +9,7 @@ angular.module('app', [])
                     .then(function (data) {
                         $scope.userFound = true;
                         
-                        $scope.userFound = data;
+                        $scope.usersData = data;
 
                         console.log($scope.usersData);
                     })
