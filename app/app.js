@@ -5,23 +5,24 @@ angular.module('app', [])
         $scope.userHasRepos = false;
 
         $scope.onUserInputChanged = function() {
+            $scope.userHasRepos = false;
+
             if ($scope.username.length > minInputLength) {
                 $http.get("https://api.github.com/users/" + $scope.username)
-                    .success(function (data) {
+                    .success(function (userData) {
                         $scope.userFound = true;
                         
-                        $scope.usersData = data;
+                        $scope.usersData = userData;
                         console.log($scope.usersData);
 
                         $http.get("https://api.github.com/users/" + $scope.username + "/followers")
-                            .then(function(data) {
-                                $scope.userFollowersData = data.data;
+                            .then(function(followersData) {
+                                $scope.userFollowersData = followersData.data;
                                 console.log($scope.userFollowersData);
                             });
                     })
                     .error(function () {
                         $scope.userFound = false;
-                        $scope.userHasRepos = false;
                     });
             } else {
                 $scope.userFound = false;
@@ -30,10 +31,16 @@ angular.module('app', [])
 
         $scope.showUserRepos = function(userName) {
             $http.get("https://api.github.com/users/" + userName + "/repos")
-                .success(function (data) {
+                .success(function (reposData) {
                   $scope.userHasRepos = true;
-                  $scope.userReposData = data;
+                  $scope.userReposData = reposData;
                   console.log($scope.userReposData);
+
+                  $http.get("https://api.github.com/repositories/" + $scope.userReposData + "/commits")
+                    .success(function(commitsData) {
+                        $scope.userRepoCommitsData = commitsData;
+                        console.log($scope.userRepoCommitsData);
+                    });
                 });
         };
 }]);
