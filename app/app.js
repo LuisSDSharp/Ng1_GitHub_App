@@ -36,7 +36,7 @@ angular.module('app', [])
                   $scope.userReposData = reposData;
                   console.log($scope.userReposData);
 
-                  $http.get("https://api.github.com/repositories/" + $scope.userReposData + "/commits")
+                  $http.get("https://api.github.com/repositories/" + $scope.userReposData.id + "/commits")
                     .success(function(commitsData) {
                         $scope.userRepoCommitsData = commitsData;
                         console.log($scope.userRepoCommitsData);
