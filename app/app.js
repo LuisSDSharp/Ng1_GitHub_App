@@ -7,7 +7,7 @@ angular.module('app', [])
         $scope.onUserInputChanged = function() {
             if ($scope.username.length > minInputLength) {
                 $http.get("https://api.github.com/users/" + $scope.username)
-                    .success(function (data) {
+                    .then(function (data) {
                         $scope.userFound = true;
                         
                         // Coverting object to array
@@ -16,7 +16,7 @@ angular.module('app', [])
                             tempObj[key] = data[key];
                             $scope.usersData.push(tempObj);
                         }
-                        
+
                         console.log(data);
                     })
             } else {
