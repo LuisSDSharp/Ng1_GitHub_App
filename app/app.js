@@ -6,7 +6,7 @@ angular.module('app', [])
         $scope.onUserInputChanged = function() {
             if ($scope.username.length > minInputLength) {
                 $http.get("https://api.github.com/users/" + $scope.username)
-                    .then(function (data) {
+                    .success(function (data) {
                         $scope.userFound = true;
                         
                         $scope.usersData = data.data;
