@@ -9,7 +9,7 @@ angular.module('app', [])
                     .success(function (data) {
                         $scope.userFound = true;
                         
-                        $scope.usersData = data.data;
+                        $scope.usersData = data;
                         console.log($scope.usersData);
 
                         $http.get("https://api.github.com/users/" + $scope.username + "/followers")
