@@ -14,14 +14,14 @@
 <body ng-controller="gitHubController">
 
     <p>Enter a GitHub username to seach</p>
-    <input type="text" ng-model="username" ng-change="onUserInputChanged()" placeholder="GitHub username...">
+    <input class="form-control" type="text" ng-model="username" ng-change="onUserInputChanged()" placeholder="GitHub username...">
 
     <div ng-hide="userFound">
         <p>User not found</p>
     </div>
 
     <div ng-show="userFound">
-        <table>
+        <table class="table">
             <tr>
                 <th>User</th>
                 <th>Followers</th>
@@ -29,10 +29,10 @@
             <tr>
                 <td>
                     <h3><a href="" ng-click="showUserRepos(usersData.login)">{{usersData.login}}</a></h3>
-                    <img width="80" height="80" src="{{usersData.avatar_url}}" alt="{{usersData.name}}">
+                    <img class="img-rounded" width="80" height="80" src="{{usersData.avatar_url}}" alt="{{usersData.name}}">
                 </td>
                 <td>
-                    <ul ng-repeat="follower in userFollowersData | limitTo:3">
+                    <ul class="list-group" ng-repeat="follower in userFollowersData | limitTo:3">
                         <li><a href="" ng-click="showUserRepos(follower.login)">{{follower.login}}</a></li>
                     </ul>
                 </td>
@@ -41,7 +41,7 @@
     </div>
 
     <div ng-show="userHasRepos">
-        <table>
+        <table class="table">
             <tr>
                 <th>Repo Name</th>
                 <th>Description</th>
@@ -55,7 +55,7 @@
                     <p>{{repo.description}}</p>
                 </td>
                 <td ng-init="commits = getRepoCommits(repo.id)">
-                    <ul ng-repeat="commit in commits | limitTo:3">
+                    <ul class="list-group" ng-repeat="commit in commits | limitTo:3">
                         <li>{{commit | json}}</li>
                     </ul>
                 </td>
