@@ -51,6 +51,10 @@ angular.module('app', [])
         };
 
         $scope.userOnly = function(commit) {
-            return commit.commit.committer.name === $scope.usersData.name;
+            if (commit.committer === null) {
+                return false;
+            }
+            
+            return commit.committer.login === $scope.usersData.login;
         };
 }]);
