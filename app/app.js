@@ -1,9 +1,9 @@
 var app = angular.module('app', []);
 
-app.directive('emitLastRepeaterElement', function() {
+app.directive('emitOnEachRepo', function() {
     return function (scope, element) {
         if(scope.$last) {
-            scope.$emit('LastRepeaterElement');
+            scope.$emit('OnEachRepo');
         }
     };
 });
@@ -46,7 +46,9 @@ app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) 
                 .then(function (reposData) {
                   $scope.userHasRepos = true;
                   $scope.userReposData = reposData.data;
+
                   $scope.currentUser = userName;
+
                   console.log("REPOS:");
                   console.log($scope.userReposData);
                 });
@@ -69,8 +71,10 @@ app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) 
             return commit.committer.login === $scope.currentUser;
         };
 
-        $scope.$on('LastRepeaterElement', function (scope, element) {
-            console.log("NG-REPEAT iteration");
+        $scope.$on('OnEachRepo', function (scope, element) {
+            console.log("Repo scope");
+            console.log(scope);
+            console.log("Repo element");
             console.log(element);
         });
 }]);
