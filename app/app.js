@@ -44,9 +44,9 @@ angular.module('app', [])
         $scope.getRepoCommits = function(id) {
             $http.get("https://api.github.com/repositories/" + id + "/commits")
                 .success(function(commitsData) {
+                    $scope.userCommitsData = commitsData;
                     console.log("COMMITS:");
-                    console.log(commitsData);
-                    return commitsData;
+                    console.log($scope.userCommitsData);
                 });
         };
 }]);

@@ -54,9 +54,8 @@
                 <td>
                     <p>{{repo.description}}</p>
                 </td>
-                <td ng-init="commits=getRepoCommits(repo.id)">
-                    HERE: {{commits | json }}
-                    <ul class="list-group" ng-repeat="commit in commits | limitTo:3">
+                <td ng-init="getRepoCommits(repo.id)">
+                    <ul class="list-group" ng-repeat="commit in userCommitsData | limitTo:3">
                         <li>
                             <p>SHA: </p>
                             {{commit.sha}}
