@@ -55,6 +55,7 @@ app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) 
                 });
         };
 
+        $scope.userCommitsData = [];
         $scope.getRepoCommits = function(id) {
             $http.get("https://api.github.com/repositories/" + id + "/commits")
                 .then(function(commitsData) {
@@ -63,6 +64,8 @@ app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) 
                     console.log("COMMITS FOR: " + id);
                     console.log($scope.userCommitsData);
                 });
+            
+            return $scope.userCommitsData;
         };
 
         $scope.userOnly = function(commit) {
