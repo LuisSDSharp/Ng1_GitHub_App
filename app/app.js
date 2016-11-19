@@ -3,6 +3,7 @@ angular.module('app', [])
         var minInputLength = 3;
         $scope.userFound = false;
         $scope.userHasRepos = false;
+        $scope.currentUser = "";
 
         $scope.onUserInputChanged = function() {
             $scope.userHasRepos = false;
@@ -36,6 +37,7 @@ angular.module('app', [])
                 .success(function (reposData) {
                   $scope.userHasRepos = true;
                   $scope.userReposData = reposData;
+                  $scope.currentUser = userName;
                   console.log("REPOS:");
                   console.log($scope.userReposData);
                 });
@@ -54,7 +56,7 @@ angular.module('app', [])
             if (commit.committer === null) {
                 return false;
             }
-            
-            return commit.committer.login === $scope.usersData.login;
+
+            return commit.committer.login === $scope.currentUser;
         };
 }]);
