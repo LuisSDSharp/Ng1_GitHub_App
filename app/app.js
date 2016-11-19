@@ -13,11 +13,13 @@ angular.module('app', [])
                         $scope.userFound = true;
                         
                         $scope.usersData = userData;
+                        console.log("USER:");
                         console.log($scope.usersData);
 
                         $http.get("https://api.github.com/users/" + $scope.username + "/followers")
                             .then(function(followersData) {
                                 $scope.userFollowersData = followersData.data;
+                                console.log("FOLLOWERS:");
                                 console.log($scope.userFollowersData);
                             });
                     })
@@ -34,6 +36,7 @@ angular.module('app', [])
                 .success(function (reposData) {
                   $scope.userHasRepos = true;
                   $scope.userReposData = reposData;
+                  console.log("REPOS:");
                   console.log($scope.userReposData);
                 });
         };
@@ -41,6 +44,7 @@ angular.module('app', [])
         $scope.getRepoCommits = function(id) {
             $http.get("https://api.github.com/repositories/" + id + "/commits")
                 .success(function(commitsData) {
+                    console.log("COMMITS:");
                     return commitsData;
                 });
         };
