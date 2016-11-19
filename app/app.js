@@ -49,4 +49,8 @@ angular.module('app', [])
                     console.log($scope.userCommitsData);
                 });
         };
+
+        $scope.userOnly = function(commit) {
+            return commit.committer.login === $scope.usersData.login;
+        };
 }]);
