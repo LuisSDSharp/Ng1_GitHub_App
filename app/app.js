@@ -45,6 +45,7 @@ angular.module('app', [])
             $http.get("https://api.github.com/repositories/" + id + "/commits")
                 .success(function(commitsData) {
                     console.log("COMMITS:");
+                    console.log(commitsData);
                     return commitsData;
                 });
         };
