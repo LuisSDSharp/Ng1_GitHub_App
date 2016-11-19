@@ -1,5 +1,14 @@
-angular.module('app', [])
-    .controller('gitHubController', ['$scope', '$http', function ($scope, $http) {
+var app = angular.module('app', []);
+
+app.directive('emitLastRepeaterElement', function() {
+    return function (scope, element) {
+        if(scope.$last) {
+            scope.$emit('LastRepeaterElement');
+        }
+    };
+});
+    
+app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) {
         var minInputLength = 3;
         $scope.userFound = false;
         $scope.userHasRepos = false;
@@ -59,4 +68,9 @@ angular.module('app', [])
 
             return commit.committer.login === $scope.currentUser;
         };
+
+        $scope.$on('LastRepeaterElement', function (scope, element) {
+            console.log("NG-REPEAT iteration");
+            console.log(element);
+        });
 }]);
