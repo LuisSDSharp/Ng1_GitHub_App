@@ -1,7 +1,7 @@
 var app = angular.module('app', []);
 
 app.directive('emitOnEachRepo', function() {
-    return function (scope, element) {
+    return function (scope) {
         if(scope.$last) {
             scope.$emit('OnEachRepo');
         }
@@ -21,14 +21,15 @@ app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) 
                 $http.get("https://api.github.com/users/" + $scope.username)
                     .success(function (userData) {
                         $scope.userFound = true;
-                        
                         $scope.usersData = userData;
+                        
                         console.log("USER:");
                         console.log($scope.usersData);
 
                         $http.get("https://api.github.com/users/" + $scope.username + "/followers")
                             .then(function(followersData) {
                                 $scope.userFollowersData = followersData.data;
+
                                 console.log("FOLLOWERS:");
                                 console.log($scope.userFollowersData);
                             });
@@ -58,6 +59,7 @@ app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) 
             $http.get("https://api.github.com/repositories/" + id + "/commits")
                 .then(function(commitsData) {
                     $scope.userCommitsData = commitsData.data;
+
                     console.log("COMMITS FOR: " + id);
                     console.log($scope.userCommitsData);
                 });
@@ -71,10 +73,8 @@ app.controller('gitHubController', ['$scope', '$http', function ($scope, $http) 
             return commit.committer.login === $scope.currentUser;
         };
 
-        $scope.$on('OnEachRepo', function (scope, element) {
+        $scope.$on('OnEachRepo', function (scope) {
             console.log("Repo scope");
             console.log(scope);
-            console.log("Repo element");
-            console.log(element);
         });
 }]);

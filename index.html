@@ -47,21 +47,23 @@
                 <th>Description</th>
                 <th>Last Changes</th>
             </tr>
-            <tr ng-repeat="repo in userReposData" emit-on-each-repo>
-                <td>
-                    <p>{{repo.name}}</p>
-                </td>
-                <td>
-                    <p>{{repo.description}}</p>
-                </td>
-                <td ng-init="getRepoCommits(repo.id)">
-                    <ul class="list-group" ng-repeat="commit in userCommitsData | filter:userOnly | limitTo:3">
-                        <li>
-                            <p>SHA: {{commit.sha}}</p>
-                            <p>Comitter: {{commit.committer.login}}</p>
-                        </li>
-                    </ul>
-                </td>
+            <tr ng-repeat="repo in userReposData">
+                <div ng-init="getRepoCommits(repo.id)">
+                    <td>
+                        <p>{{repo.name}}</p>
+                    </td>
+                    <td>
+                        <p>{{repo.description}}</p>
+                    </td>
+                    <td>
+                        <ul class="list-group" ng-repeat="commit in userCommitsData | filter:userOnly | limitTo:3">
+                            <li>
+                                <p>SHA: {{commit.sha}}</p>
+                                <p>Comitter: {{commit.committer.login}}</p>
+                            </li>
+                        </ul>
+                    </td>
+                </div>
             </tr>
         </table>
     </div>
