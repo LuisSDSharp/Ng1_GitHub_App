@@ -34,9 +34,9 @@ angular.module('app', [])
 
         $scope.showUserRepos = function(userName) {
             $http.get("https://api.github.com/users/" + userName + "/repos")
-                .success(function (reposData) {
+                .then(function (reposData) {
                   $scope.userHasRepos = true;
-                  $scope.userReposData = reposData;
+                  $scope.userReposData = reposData.data;
                   $scope.currentUser = userName;
                   console.log("REPOS:");
                   console.log($scope.userReposData);
@@ -46,7 +46,7 @@ angular.module('app', [])
         $scope.getRepoCommits = function(id) {
             $http.get("https://api.github.com/repositories/" + id + "/commits")
                 .then(function(commitsData) {
-                    $scope.userCommitsData = commitsData;
+                    $scope.userCommitsData = commitsData.data;
                     console.log("COMMITS FOR: " + id);
                     console.log($scope.userCommitsData);
                 });
