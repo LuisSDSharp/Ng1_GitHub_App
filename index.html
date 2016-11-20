@@ -47,8 +47,8 @@
                 <th>Description</th>
                 <th>Last Changes</th>
             </tr>
-            <tr ng-repeat="repo in userReposData"  emit-on-each-repo>
-                <td>
+            <tr ng-repeat="repo in userReposData">
+                <td emit-on-each-repo>
                     <p>{{repo.name}}</p>
                 </td>
                 <td>
