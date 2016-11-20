@@ -63,12 +63,11 @@
                             <p>{{repo.description}}</p>
                         </td>
                         <td ng-init="getRepoCommits(repo.id)">
-                            <dl class="list-group" ng-repeat="commit in userCommitsData | filter:userOnly | limitTo:3">
-                                <dt>SHA
-                                    <dt>
-                                        <dd>{{commit.sha}}</dd>
-                                        <dt>Comitter</dt>
-                                        <dd>{{commit.committer.login}}</dd>
+                            <dl class="dl-horizontal" ng-repeat="commit in userCommitsData | filter:userOnly | limitTo:3">
+                                <dt>SHA<dt>
+                                    <dd>{{commit.sha}}</dd>
+                                <dt>Comitter</dt>
+                                    <dd>{{commit.committer.login}}</dd>
                             </dl>
                         </td>
                     </tr>
