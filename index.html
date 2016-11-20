@@ -12,60 +12,75 @@
 </head>
 
 <body ng-controller="gitHubController">
+    <header class="jumbotron text-center">
+        <h1>GitHub User Finder</h1>
+    </header>
 
-    <p>Enter a GitHub username to seach</p>
-    <input class="form-control" type="text" ng-model="username" ng-change="onUserInputChanged()" placeholder="GitHub username...">
+    <div class="container">
 
-    <div ng-hide="userFound">
-        <p>User not found</p>
+        <div class="panel">
+            <p>Enter a GitHub username to seach</p>
+            <input class="form-control" type="text" ng-model="username" ng-change="onUserInputChanged()" placeholder="GitHub username...">
+        </div>
+
+        <div class="panel">
+            <div ng-hide="userFound">
+                <p>User not found</p>
+            </div>
+        </div>
+
+        <div ng-show="userFound">
+            <table class="table table-bordered">
+                <tr>
+                    <th>User</th>
+                    <th>Followers</th>
+                </tr>
+                <tr>
+                    <td>
+                        <h3><a href="" ng-click="showUserRepos(usersData.login)">{{usersData.login}}</a></h3>
+                        <img class="img-rounded" width="80" height="80" src="{{usersData.avatar_url}}" alt="{{usersData.name}}">
+                    </td>
+                    <td>
+                        <ul class="list-group" ng-repeat="follower in userFollowersData | limitTo:3">
+                            <li><a href="" ng-click="showUserRepos(follower.login)">{{follower.login}}</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </div>
+
+        <div ng-show="userHasRepos">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Repo Name</th>
+                    <th>Description</th>
+                    <th>Last Changes</th>
+                </tr>
+                <tr ng-repeat="repo in userReposData">
+                    <td>
+                        <p>{{repo.name}}</p>
+                    </td>
+                    <td>
+                        <p>{{repo.description}}</p>
+                    </td>
+                    <td ng-init="getRepoCommits(repo.id)">
+                        <dl class="list-group" ng-repeat="commit in userCommitsData | filter:userOnly | limitTo:3">
+                            <dt>SHA
+                                <dt>
+                                    <dd>{{commit.sha}}</dd>
+                                    <dt>Comitter</dt>
+                                    <dd>{{commit.committer.login}}</dd>
+                        </dl>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <div ng-show="userFound">
-        <table class="table">
-            <tr>
-                <th>User</th>
-                <th>Followers</th>
-            </tr>
-            <tr>
-                <td>
-                    <h3><a href="" ng-click="showUserRepos(usersData.login)">{{usersData.login}}</a></h3>
-                    <img class="img-rounded" width="80" height="80" src="{{usersData.avatar_url}}" alt="{{usersData.name}}">
-                </td>
-                <td>
-                    <ul class="list-group" ng-repeat="follower in userFollowersData | limitTo:3">
-                        <li><a href="" ng-click="showUserRepos(follower.login)">{{follower.login}}</a></li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div ng-show="userHasRepos">
-        <table class="table">
-            <tr>
-                <th>Repo Name</th>
-                <th>Description</th>
-                <th>Last Changes</th>
-            </tr>
-            <tr ng-repeat="repo in userReposData">
-                <td>
-                    <p>{{repo.name}}</p>
-                </td>
-                <td>
-                    <p>{{repo.description}}</p>
-                </td>
-                <td ng-init="getRepoCommits(repo.id)">
-                    <ul class="list-group" ng-repeat="commit in userCommitsData | filter:userOnly | limitTo:3">
-                        <li>
-                            <p>SHA: {{commit.sha}}</p>
-                            <p>Comitter: {{commit.committer.login}}</p>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </div>
-
+    <footer width="100%" text-align="center">
+        <h2>Created by Luis Larghi</h2>
+    </footer>
 </body>
 
 </html>
